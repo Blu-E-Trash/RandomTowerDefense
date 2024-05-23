@@ -1288,7 +1288,7 @@ GameObject:
   - component: {fileID: 892729335}
   - component: {fileID: 892729334}
   m_Layer: 5
-  m_Name: ArchorDamage
+  m_Name: ArchorDamageUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9457,7 +9457,7 @@ GameObject:
   - component: {fileID: 1625071139}
   - component: {fileID: 1625071138}
   m_Layer: 5
-  m_Name: MechaDamage
+  m_Name: MechaDamageUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11636,7 +11636,7 @@ GameObject:
   - component: {fileID: 1876404308}
   - component: {fileID: 1876404307}
   m_Layer: 5
-  m_Name: SwordManDamage
+  m_Name: SwordManDamageUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11711,7 +11711,7 @@ GameObject:
   - component: {fileID: 1896979253}
   - component: {fileID: 1896979252}
   m_Layer: 5
-  m_Name: WizardDamage
+  m_Name: WizardDamageUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
