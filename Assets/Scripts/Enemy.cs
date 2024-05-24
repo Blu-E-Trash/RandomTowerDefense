@@ -9,6 +9,12 @@ public class Enemy : MonoBehaviour
     private int             currentIndex = 0;   //현재 목표지점 인덕스
     private Movement2D      movement2D;         //오브젝트 이동 제어
     private EnemySpawner    enemySpawner;       //적의 삭제를 본인이 하지 않고 EnemySpawner에 알려서 삭제
+    private EnemyHp enemyHp;
+
+
+    public float MoveSpeed => movement2D.MoveSpeed;
+    public float EnemyHp => enemyHp.MaxHP;
+    public float Gold => gold;
     [SerializeField]
     private int gold = 10;                      //사망시 획득 골드
     

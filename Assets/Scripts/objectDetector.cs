@@ -18,6 +18,7 @@ public class objectDetector : MonoBehaviour
         //"MaomCamera" 태그를 가지고 있는 오브젝트 탐색 후 Camera컴포넌트 정보 전달
         //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();와 동일
         mainCamera = Camera.main;
+        Debug.Log("레이케스트로 넘어옴");
     }
 
     private void Update()
@@ -25,6 +26,7 @@ public class objectDetector : MonoBehaviour
         //마우스가 UI에 머물러 있을 때는 아래 코드가 실행되지 않도록 함
         if (EventSystem.current.IsPointerOverGameObject() == true)
         {
+            Debug.Log("UI에 마우스 있음");
             return;
         }
 
@@ -44,19 +46,28 @@ public class objectDetector : MonoBehaviour
                 //광선에 부딪힌 오브젝트의 태그가 "Tile"이면
                 if (hit.transform.CompareTag("Tile"))
                 {
+                    Debug.Log("타일 클릭");
                     //타워를 생성하는 SpawnTower() 호출
                     towerSpawner.SpawnTower(hit.transform);
                 }
                 else if (hit.transform.CompareTag("Tower"))
                 {
+                    Debug.Log("타워 클릭");
+                    //타워면 타워 정보 호출
                     towerDataViewer.OnPanel(hit.transform);
+                }
+                else if (hit.transform.CompareTag("Enemy"))
+                {
+                    Debug.Log("적 클릭");
+                    //적이면 적 정보 호출
+                    towerDataViewer.OnEnemyPanel(hit.transform);
                 }
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            //마우스를 눌렀을 때 선택한 오브젝트가 없거나 선택한 오브젝트가 타워가 아니면
-            if (hitTransform == null || hitTransform.CompareTag("Tower") == false)
+            //마우스를 눌렀을 때 선택한 오브젝트가 없거나 선택한 오브젝트가 타워나 적이 아니면
+            if (hitTransform == null || hitTransform.CompareTag("Tower") == false||hitTransform.CompareTag("Enemy")==false)
             {
                 //타워 패털 비활성화
                 towerDataViewer.OffPanel();

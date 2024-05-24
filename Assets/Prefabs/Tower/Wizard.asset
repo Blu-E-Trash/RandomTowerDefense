@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a873adedd94654aba3f6a6a4e56905, type: 3}
+  m_Name: Wizard
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 5692499551008166594, guid: d7c98b0863507c948b2924d4df4b1b7a, type: 3}
+  weapon:
+  - sprite: {fileID: 3805063247507766641, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
+    damage: 1.5
+    rate: 0.5
+    range: 3
+    sell: 10
+  - sprite: {fileID: 1145669499519311739, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
+    damage: 1.5
+    rate: 0.3
+    range: 3
+    sell: 10

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponType { Cannon = 0,Archor,Wizard,Sword,}
-public enum WeaponState { SearchTarget = 0, TryAttackCannon,TryAttackWizard,TryAttackArchor,TryAttackSword}//AttackToTarget
+public enum WeaponState { SearchTarget = 0, TryAttackCannon}//AttackToTarget
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -18,21 +18,7 @@ public class TowerWeapon : MonoBehaviour
     [Header("Achor")]
     [SerializeField]
     private GameObject projectilePrefab; //발사체 프리팹
-
-    [Header("Sword")]
-    [SerializeField]
-    private LineRenderer lineRenderer;
-    [SerializeField]
-    private Transform hitEffect;
-    [SerializeField]
-    private LayerMask targerLayer;
     
-    //[SerializeField]
-    //private float attackRate = 0.5f; //공속
-    //[SerializeField]
-    //private float attackRange = 2.0f;//공격 범위
-    //[SerializeField]
-    //private int attackDamage = 1; //딜
     private int level = 0; //타워 레벨
     private WeaponState weaponState = WeaponState.SearchTarget; //타워 무기의 상태
     private SpriteRenderer spriteRenderer;
@@ -49,22 +35,14 @@ public class TowerWeapon : MonoBehaviour
     public float Damage => towerTemplate.weapon[level].damage;
     public float Rate => towerTemplate.weapon[level].rate;
     public float Range => towerTemplate.weapon[level].range;
-    public int UpgradeCost => Level < MaxLevel? towerTemplate.weapon[level+1].cost : 0;
     public int SellCost => towerTemplate.weapon[level].sell;
     public int Level => level + 1;
     public int MaxLevel => towerTemplate.weapon.Length;
-    public float Slow => towerTemplate.weapon[level].slow;
-    public float Buff => towerTemplate.weapon[level].buff;
     public WeaponType WeaponType => weaponType;
     public float AddedDamage
     {
         set => addedDamage = Mathf.Max(0, value);
         get => addedDamage;
-    }
-    public int BuffLevel
-    {
-        set=> buffLevel = Mathf.Max(0, value);
-        get => buffLevel;   
     }
     public void Setup(Tower_Spawner tower_Spawner,EnemySpawner enemySpawner, PlayerGold playerGold,Tile ownerTile)
     {
@@ -112,19 +90,6 @@ public class TowerWeapon : MonoBehaviour
     private IEnumerator SearchTarget()
     {
         while(true){
-            //제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
-            //float closesDistSqr = Mathf.Infinity;
-            ////적 스포너의 적 리스트에 있는 맵에 존재하는 모든 적 검사
-            //for(int i = 0;i<enemySpawner.EnemyList.Count;++i) {
-            //    float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
-            //    //현재 검사중인 적과의 거리가 공격범위 내에 있고, 현재까지 검사한 적보다 거리가 가까우면
-            //    //if(distance <= attackRange && distance<=closesDistSqr)
-            //    if(distance < towerTemplate.weapon[level].range && distance<=closesDistSqr)
-            //    {
-            //        closesDistSqr = distance;
-            //        attackTarget = enemySpawner.EnemyList[i].transform;
-            //    }
-            //}
             attackTarget = FindClosestAttackTarget();
             if(attackTarget != null)
             {
@@ -134,11 +99,11 @@ public class TowerWeapon : MonoBehaviour
                 }
                 else if(weaponType == WeaponType.Archor)
                 {
-                    ChangeState(WeaponState.TryAttackArchor);
+                    ChangeState(WeaponState.TryAttackCannon);
                 }
                 else if (weaponType == WeaponType.Wizard)
                 {
-                    ChangeState(WeaponState.TryAttackWizard);
+                    ChangeState(WeaponState.TryAttackCannon);
                 }
             }
 
@@ -149,19 +114,6 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            ////1.target이 있는지 검사(다른 발사체에 의해 제거, Goal 지점까지 이동해 삭제 등)
-            //if(attackTarget == null)
-            //{
-            //    ChangeState(WeaponState.SearchTarget); break;
-            //}
-            ////2. target이 공격 범위 안에 있는지 검사(공격 범위를 벗어나면 새로운 적 탐색)
-            //float distance = Vector3.Distance(attackTarget.position,transform.position);
-            //if (distance > towerTemplate.weapon[level].range)
-            //{
-            //    attackTarget = null;
-            //    ChangeState(WeaponState.SearchTarget);
-            //    break;
-            //}
             if (IsPossibleToAttackTarget() == false)
             {
                 ChangeState(WeaponState.SearchTarget);
@@ -172,26 +124,6 @@ public class TowerWeapon : MonoBehaviour
 
             //4. 공격(발사체 생성)
             SpawnProjectile();
-        }
-    }
-    private IEnumerator TryAttackLaser()
-    {
-        //레이저, 레이저 타격 효과 활성화
-        EnableLaser();
-        while (true)
-        {
-            //타겟을 공격 가능한지 검사
-            if (IsPossibleToAttackTarget() == false)
-            {
-                //비활성화
-                DisableLaser();
-                ChangeState(WeaponState.SearchTarget);
-                break;
-            }
-
-            SpawnLaser();
-
-            yield return null;
         }
     }
    
@@ -237,44 +169,10 @@ public class TowerWeapon : MonoBehaviour
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         clone.GetComponent<Projectile>().Setup(attackTarget, damage);
     }
-    private void EnableLaser()
-    {
-        lineRenderer.gameObject.SetActive(true);
-        hitEffect.gameObject.SetActive(true);
-    }
-    private void DisableLaser()
-    {
-        lineRenderer.gameObject.SetActive(false);
-        hitEffect.gameObject.SetActive(false);
-    }
-
-    private void SpawnLaser()
-    {
-        Vector3 direction = attackTarget.position - spawnPoint.position;
-        RaycastHit2D[] hit = Physics2D.RaycastAll(spawnPoint.position, direction, towerTemplate.weapon[level].range,targerLayer);
-
-        //같은 방향으로 여러 개의 광선을 쏴서 그 중 현재 공격타겟과 동일한 오브젝트를 검출
-        for(int i=0; i < hit.Length; ++i)
-        {
-            if (hit[i].transform == attackTarget)
-            {
-                //선의 시작지점
-                lineRenderer.SetPosition(0, spawnPoint.position);
-                //목표지점
-                lineRenderer.SetPosition(1, new Vector3(hit[i].point.x, hit[i].point.y, 0) + Vector3.back);
-                //타격 효과 위치 설정
-                hitEffect.position = hit[i].point;
-                ////적 체력 감소(초당 딜만큼 감소)
-                //attackTarget.GetComponent<EnemyHp>().TakeDamage(towerTemplate.weapon[level].damage*Time.deltaTime);
-                float damage = towerTemplate.weapon[level].damage + AddedDamage;
-                attackTarget.GetComponent<EnemyHp>().TakeDamage(damage * Time.deltaTime);
-            }
-        }
-    }
     public bool Upgrade()
     {
         //타워 업그레이드에 필요한 골드가 충분한지 검사
-        if (playerGold.CurrentGold < towerTemplate.weapon[level + 1].cost)
+        if (playerGold.CurrentGold < 100)
         {
             return false;
         }
@@ -282,16 +180,6 @@ public class TowerWeapon : MonoBehaviour
         level++;
         //외형 변경
         spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
-        //골드 차감
-        playerGold.CurrentGold -= towerTemplate.weapon[level].cost;
-
-        //무기 속성이 마법사면
-        if(weaponType == WeaponType.Wizard)
-        {
-            //레벨에 따라 레이저 굵기 설정
-            lineRenderer.startWidth = 0.05f + level * 0.05f;
-            lineRenderer.endWidth = 0.05f;
-        }
 
         return true;
     }

@@ -16,20 +16,13 @@ public class TowerDataViewer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textRange;
     [SerializeField]
-    private TextMeshProUGUI textLevel;
-    [SerializeField]
-    private Text textUpgradeCost;
-    [SerializeField]
-    private Text textSellCost;
-    [SerializeField]
     private TowerAttackRange towerAttackRange;
-    [SerializeField]
-    private Button buttonUpgrade;
     [SerializeField]
     private SystemTextViewer systemTextViewer;
     private PlayerHp playerHp;
 
     private TowerWeapon currentTower;
+    private Enemy currentEnemy;
     private void Awake()
     {
         OffPanel();
@@ -39,6 +32,13 @@ public class TowerDataViewer : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) {
             OffPanel();
         }
+    }
+    public void OnEnemyPanel(Transform Enemy)
+    {
+        
+        currentEnemy = Enemy.GetComponent<Enemy>();
+        gameObject.SetActive(true);
+        UpdateEnemyData();
     }
     public void OnPanel(Transform towerWeapon)
     {
@@ -61,19 +61,18 @@ public class TowerDataViewer : MonoBehaviour
 
     private void UpdateTowerData()
     {
-        if(currentTower.WeaponType == WeaponType.Cannon||currentTower.WeaponType == WeaponType.Wizard || currentTower.WeaponType == WeaponType.Archor|| currentTower.WeaponType == WeaponType.Sword) {
-            imageTower.rectTransform.sizeDelta = new Vector2(22, 19);
-            textDamage.text = "Damage:" + currentTower.Damage+"+"+"<color=red>"+currentTower.AddedDamage.ToString("F1")+"</color>";
-        }
-        imageTower.sprite = currentTower.TowerSprite;
-        //textDamage.text = "Damage:" + currentTower.Damage;
+ 
+        imageTower.rectTransform.sizeDelta = new Vector2(60, 60);
+        textDamage.text = "Damage:" + currentTower.Damage+"+"+"<color=red>"+currentTower.AddedDamage.ToString("F1")+"</color>";
+        //imageTower.sprite = currentTower.TowerSprite;
         textRate.text = "Rate"+currentTower.Rate;                   //공속
         textRange.text = "Range"+currentTower.Range;                //범위
-        textLevel.text = "Level"+ currentTower.Level;               //렙
-        textUpgradeCost.text = currentTower.UpgradeCost.ToString(); //업글 비용
-        textSellCost.text = currentTower.SellCost.ToString();       //팔기면 얼마나
-        //업그레이드가 불가능해지면 버튼 비활성화
-        buttonUpgrade.interactable = currentTower.Level< currentTower.MaxLevel? true: false;
+    }
+    private void UpdateEnemyData()
+    {
+        textDamage.text = "Speed:" + currentEnemy.MoveSpeed;
+        textRate.text = "Hp" + currentEnemy.EnemyHp;                
+        textRange.text = "Gold" + currentEnemy.Gold;                
     }
 
     public void OnClickEventTowerUpgrade()
