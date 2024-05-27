@@ -12,15 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a873adedd94654aba3f6a6a4e56905, type: 3}
   m_Name: Wizard
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 5692499551008166594, guid: d7c98b0863507c948b2924d4df4b1b7a, type: 3}
+  towerPrefab: {fileID: 4167185272193139921, guid: 1590feda76380384db40b6f81bc1cb81, type: 3}
   weapon:
   - sprite: {fileID: 3805063247507766641, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
     damage: 1.5
     rate: 0.5
-    range: 3
-    sell: 10
-  - sprite: {fileID: 1145669499519311739, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
-    damage: 1.5
-    rate: 0.3
     range: 3
     sell: 10

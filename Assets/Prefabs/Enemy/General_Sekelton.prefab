@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 20
+  point: 40
 --- !u!114 &4087363966807412146
 MonoBehaviour:
   m_ObjectHideFlags: 0

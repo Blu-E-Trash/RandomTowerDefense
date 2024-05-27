@@ -14,9 +14,13 @@ public class TextTMPViewer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textEnemyCount;
     [SerializeField]
+    private TextMeshProUGUI textPlayerPoint;
+    [SerializeField]
     private PlayerHp playerHP;
     [SerializeField]
     private PlayerGold playerGold;
+    [SerializeField]
+    private PlayerPoint playerPoint;
     [SerializeField]
     private WaveSysytem waveSystem;//웨이브 정보
     [SerializeField]
@@ -27,5 +31,6 @@ public class TextTMPViewer : MonoBehaviour
         textPlayerGold.text = playerGold.CurrentGold.ToString();
         textWave.text = waveSystem.CurrentWave+"/" + waveSystem.MaxWave;
         textEnemyCount.text = enemySpawner.CurrentEnemyCount + "/" + enemySpawner.MaxEnemyCount;
+        textPlayerPoint.text = playerPoint.CurrentPoint.ToString();
     }
 }

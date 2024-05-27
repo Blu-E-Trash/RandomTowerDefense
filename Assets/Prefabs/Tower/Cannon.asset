@@ -19,8 +19,3 @@ MonoBehaviour:
     rate: 0.7
     range: 3
     sell: 10
-  - sprite: {fileID: 21300000, guid: 666e5fe2ebe826a48a28639e92076a7d, type: 3}
-    damage: 1.5
-    rate: 0.7
-    range: 4
-    sell: 10

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum WeaponType { Cannon = 0,Archor,Wizard,Sword,}
@@ -29,9 +30,9 @@ public class TowerWeapon : MonoBehaviour
     private Tile ownerTile;
 
     private float addedDamage;
-    private int buffLevel;
 
     public Sprite TowerSprite => towerTemplate.weapon[level].sprite;
+    //public Sprite EnemySprite => 
     public float Damage => towerTemplate.weapon[level].damage;
     public float Rate => towerTemplate.weapon[level].rate;
     public float Range => towerTemplate.weapon[level].range;
@@ -44,6 +45,10 @@ public class TowerWeapon : MonoBehaviour
         set => addedDamage = Mathf.Max(0, value);
         get => addedDamage;
     }
+    public void UpgradeDamage()
+    {
+        
+    }
     public void Setup(Tower_Spawner tower_Spawner,EnemySpawner enemySpawner, PlayerGold playerGold,Tile ownerTile)
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -51,13 +56,9 @@ public class TowerWeapon : MonoBehaviour
         this.enemySpawner = enemySpawner;
         this.playerGold = playerGold;
         this.ownerTile = ownerTile;
-        //최초 상태를 WeaponState.SearchTarget으로 설정
-        //ChangeState(WeaponState.SearchTarget);
-        //무기 속성이 캐논, 레이저일 떄
-        if(weaponType == WeaponType.Cannon||weaponType == WeaponType.Archor|| weaponType == WeaponType.Wizard)
-        {
-            ChangeState(WeaponState.SearchTarget);
-        }
+        
+        ChangeState(WeaponState.SearchTarget);
+        
     }
     public void ChangeState(WeaponState newState)
     {
@@ -164,8 +165,8 @@ public class TowerWeapon : MonoBehaviour
     {
         GameObject clone = Instantiate(projectilePrefab,spawnPoint.position,Quaternion.identity);
         //생성된 발사체에게 공격대상(attackTarget)정보 제공
-        //clone.GetComponent<Projectile>().Setup(attackTarget, towerTemplate.weapon[level].damage);
-        //공격력 = 기본 공+버프 추가공
+       
+        //공격력 = 기본 공+업글 추가공
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
         clone.GetComponent<Projectile>().Setup(attackTarget, damage);
     }

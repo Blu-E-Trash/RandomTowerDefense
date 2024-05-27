@@ -22,7 +22,7 @@ public class TowerDataViewer : MonoBehaviour
     private PlayerHp playerHp;
 
     private TowerWeapon currentTower;
-    private Enemy currentEnemy;
+    
     private void Awake()
     {
         OffPanel();
@@ -32,13 +32,6 @@ public class TowerDataViewer : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) {
             OffPanel();
         }
-    }
-    public void OnEnemyPanel(Transform Enemy)
-    {
-        
-        currentEnemy = Enemy.GetComponent<Enemy>();
-        gameObject.SetActive(true);
-        UpdateEnemyData();
     }
     public void OnPanel(Transform towerWeapon)
     {
@@ -61,20 +54,11 @@ public class TowerDataViewer : MonoBehaviour
 
     private void UpdateTowerData()
     {
- 
-        imageTower.rectTransform.sizeDelta = new Vector2(60, 60);
         textDamage.text = "Damage:" + currentTower.Damage+"+"+"<color=red>"+currentTower.AddedDamage.ToString("F1")+"</color>";
-        //imageTower.sprite = currentTower.TowerSprite;
+        imageTower.sprite = currentTower.TowerSprite;
         textRate.text = "Rate"+currentTower.Rate;                   //공속
         textRange.text = "Range"+currentTower.Range;                //범위
     }
-    private void UpdateEnemyData()
-    {
-        textDamage.text = "Speed:" + currentEnemy.MoveSpeed;
-        textRate.text = "Hp" + currentEnemy.EnemyHp;                
-        textRange.text = "Gold" + currentEnemy.Gold;                
-    }
-
     public void OnClickEventTowerUpgrade()
     {
         //타워 업그레이드 시도
@@ -91,13 +75,27 @@ public class TowerDataViewer : MonoBehaviour
             //타워 업그레이드에 필요한 비용 부족하다고 출력
             systemTextViewer.PrintText(SystemType.Money);
         }
-        
     }
     public void OnClickEventTowerSell()
     {
-        //타워 판매
+        //타워 판매 
         currentTower.Sell();
         //타워가 사라져서 panel, 공격범위 off
         OffPanel();
     }
+    //적 정보 판넬 만들기..
+    //public void OnEnemyPanel(Transform Enemy)
+    //{
+    //    currentEnemy = Enemy.GetComponent<Enemy>();
+    //    gameObject.SetActive(true);
+    //    UpdateEnemyData();
+    //}
+    //private void UpdateEnemyData()
+    //{
+    //    imageTower.sprite = currentEnemy.EnemySprtie;
+    //    textDamage.text = "Speed:" + currentEnemy.MoveSpeed;
+    //    textRate.text = "Hp" + currentEnemy.EnemyHp;
+    //    textRange.text = "Gold" + currentEnemy.Gold;
+
+    //}
 }

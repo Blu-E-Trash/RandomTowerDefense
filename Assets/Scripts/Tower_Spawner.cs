@@ -18,8 +18,7 @@ public class Tower_Spawner : MonoBehaviour
     public void ReadyToSpawnTower()
     {
         //타워를 랜덤으로 지정
-        int type = Random.Range(0, 4);
-        towerType = type;
+        towerType = Random.Range(0,4);
         //버튼을 중복해서 누르는 것을 방지
         if(isOnTowerButton == true)
         {
@@ -47,13 +46,7 @@ public class Tower_Spawner : MonoBehaviour
         {
             return;
         }
-        //타워 건설 가능 여부 확인
-        ////1. 타워를 건설할 만큼 돈이 없으면 타워 건설 x
-        //if (towerTemplate.weapon[0].cost > playerGold.CurrentGold)
-        //{
-        //    systemTextViewer.PrintText(SystemType.Money);
-        //    return;
-        //}
+   
         Tile tile = tileTransform.GetComponent<Tile>();
 
         //타워 건설 가능 여부 확인
@@ -71,6 +64,7 @@ public class Tower_Spawner : MonoBehaviour
         playerGold.CurrentGold -= 30;
         //선택한 타일의 위치에 타워 건설(타일보타 z축 -1의 위치에 배치)
         Vector3 positison = tileTransform.position + Vector3.back;
+        GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, positison, Quaternion.identity);
         switch (towerType)
         {
             case 0:
@@ -83,11 +77,9 @@ public class Tower_Spawner : MonoBehaviour
             case 3:
                 systemTextViewer.PrintText(SystemType.Wizard); break;
         }
-        GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab,positison,Quaternion.identity);
         //타워 무기에 enemySpawner 정보 전달
-        clone.GetComponent<TowerWeapon>().Setup(this,enemySpawner, playerGold,tile);
-
-        //타워 건설을 취소할 수 있는 코루틴 함수 중지
+        clone.GetComponent<TowerWeapon>().Setup(clone.GetComponent<Tower_Spawner>(),enemySpawner, playerGold,tile);
+         //타워 건설을 취소할 수 있는 코루틴 함수 중지
         StopCoroutine("OnTowerCancelSystem");
     }
     private IEnumerator OnTowerCancelSystem()
@@ -97,6 +89,7 @@ public class Tower_Spawner : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
             {
                 isOnTowerButton = false;
+                //타워 건설 취소 메세지 나오게 하기
                 break;
             }
 

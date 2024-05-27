@@ -12,15 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a873adedd94654aba3f6a6a4e56905, type: 3}
   m_Name: Archor
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 451180904432529589, guid: 89b2f5bd2b16f1a4c9ec5c4a93f4d621, type: 3}
+  towerPrefab: {fileID: 4167185272193139921, guid: 971531cf0eb0e5b43bea42fb9de75efa, type: 3}
   weapon:
   - sprite: {fileID: 4749904528282777558, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
     damage: 1
-    rate: 0.5
-    range: 2
-    sell: 10
-  - sprite: {fileID: -3875180428987827631, guid: 4d701fb8bab94204e92af20e3e7b6a8a, type: 3}
-    damage: 2
     rate: 0.5
     range: 2
     sell: 10

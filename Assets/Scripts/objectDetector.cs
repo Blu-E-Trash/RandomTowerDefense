@@ -7,6 +7,8 @@ public class objectDetector : MonoBehaviour
     private Tower_Spawner towerSpawner;
     [SerializeField]
     private TowerDataViewer towerDataViewer;
+    [SerializeField]
+    LayerMask mask;
 
     private Camera mainCamera;
     private Ray ray;
@@ -43,31 +45,25 @@ public class objectDetector : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 hitTransform = hit.transform;
-                //광선에 부딪힌 오브젝트의 태그가 "Tile"이면
-                if (hit.transform.CompareTag("Tile"))
-                {
-                    Debug.Log("타일 클릭");
-                    //타워를 생성하는 SpawnTower() 호출
-                    towerSpawner.SpawnTower(hit.transform);
-                }
-                else if (hit.transform.CompareTag("Tower"))
+                if (hit.transform.CompareTag("Tower"))
                 {
                     Debug.Log("타워 클릭");
                     //타워면 타워 정보 호출
                     towerDataViewer.OnPanel(hit.transform);
                 }
-                else if (hit.transform.CompareTag("Enemy"))
+                //광선에 부딪힌 오브젝트의 태그가 "Tile"이면
+                else if (hit.transform.CompareTag("Tile"))
                 {
-                    Debug.Log("적 클릭");
-                    //적이면 적 정보 호출
-                    towerDataViewer.OnEnemyPanel(hit.transform);
+                    Debug.Log(hit.transform.gameObject);
+                    //타워를 생성하는 SpawnTower() 호출
+                    towerSpawner.SpawnTower(hit.transform);
                 }
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            //마우스를 눌렀을 때 선택한 오브젝트가 없거나 선택한 오브젝트가 타워나 적이 아니면
-            if (hitTransform == null || hitTransform.CompareTag("Tower") == false||hitTransform.CompareTag("Enemy")==false)
+            //마우스를 눌렀을 때 선택한 오브젝트가 없거나 선택한 오브젝트가 타워가 아니면
+            if (hitTransform == null || hitTransform.CompareTag("Tower") == false)
             {
                 //타워 패털 비활성화
                 towerDataViewer.OffPanel();

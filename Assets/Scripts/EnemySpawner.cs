@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
     private PlayerHp playerHp;
     [SerializeField]
     private PlayerGold playerGold;
+    [SerializeField]
+    private PlayerPoint playerPoint;
     private Wave currentWave;//현재 웨이브 정보
     private int currentEnemyCount; //현재 웨이브에 남아있는 적 숫자(시작시 max, 사망시 -1)
     private List<Enemy>     enemyList;  //현재 맵에 존재하는 모든 적의 정보
@@ -31,8 +33,6 @@ public class EnemySpawner : MonoBehaviour
     {
         //적 리스트 메모리 할당
         enemyList = new List<Enemy> ();
-        //생성 코루틴 함수 호출
-        //StartCoroutine("SpawnEnemy");
     }
     public void StartWave(Wave wave)
     {
@@ -67,7 +67,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(currentWave.spawnTime);//
         }
     }
-    public void DestroyEnemy(EnemyDestroyType type,Enemy enemy,int gold)
+    public void DestroyEnemy(EnemyDestroyType type,Enemy enemy,int gold,int point)
     {
         //적이 목표 지점까지 도착했을 때
         if(type == EnemyDestroyType.Arrive)
@@ -76,6 +76,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else if (type == EnemyDestroyType.kill)
         {
+            playerPoint.CurrentPoint += point;
             playerGold.CurrentGold += gold;
         }
         currentEnemyCount--;
@@ -83,6 +84,5 @@ public class EnemySpawner : MonoBehaviour
         enemyList.Remove(enemy);
         //적 오브젝트 삭제
         Destroy(enemy.gameObject);
-        
     }
 }
