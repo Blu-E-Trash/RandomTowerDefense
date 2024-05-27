@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5811317058946132836}
   - component: {fileID: 5794454614566450773}
   - component: {fileID: 8955264041061275395}
+  - component: {fileID: -7819616503573647333}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Tower
@@ -133,3 +134,24 @@ MonoBehaviour:
   spawnPoint: {fileID: 7045813469779626894}
   weaponType: 2
   projectilePrefab: {fileID: 5820755337296799149, guid: f35586f00d3aaf4448f6c1935f2c3c50, type: 3}
+--- !u!65 &-7819616503573647333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4167185272193139921}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0.5, z: 0}

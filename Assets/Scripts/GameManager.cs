@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
         else
             menuSet.SetActive(true);
     }
-
     public void GameExit()
     {
         Application.Quit();

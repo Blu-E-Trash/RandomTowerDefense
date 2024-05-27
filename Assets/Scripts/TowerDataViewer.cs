@@ -16,8 +16,6 @@ public class TowerDataViewer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textRange;
     [SerializeField]
-    private TowerAttackRange towerAttackRange;
-    [SerializeField]
     private SystemTextViewer systemTextViewer;
     private PlayerHp playerHp;
 
@@ -41,15 +39,13 @@ public class TowerDataViewer : MonoBehaviour
         gameObject.SetActive(true);
         //타워 정보를 갱신
         UpdateTowerData();
-        //타워 오브젝트 주변에 표시되는 공격범위 Sprite On
-        towerAttackRange.OnAttackRange(currentTower.transform.position, currentTower.Range);
+
     }
     public void OffPanel()
     {
         //타워 정보 판넬 off
         gameObject.SetActive(false);
-        //타워 공격 범위 Spriteo off
-        towerAttackRange.OffAttackRange();
+
     }
 
     private void UpdateTowerData()
@@ -68,8 +64,6 @@ public class TowerDataViewer : MonoBehaviour
         {
             //타워가 업그레이드 되었기 때문에 타워 정보 갱신
             UpdateTowerData();
-            //타워 주변에 보이는 공격 범위도 갱신
-            towerAttackRange.OnAttackRange(currentTower.transform.position, currentTower.Range);
         }
         else {
             //타워 업그레이드에 필요한 비용 부족하다고 출력
@@ -83,19 +77,4 @@ public class TowerDataViewer : MonoBehaviour
         //타워가 사라져서 panel, 공격범위 off
         OffPanel();
     }
-    //적 정보 판넬 만들기..
-    //public void OnEnemyPanel(Transform Enemy)
-    //{
-    //    currentEnemy = Enemy.GetComponent<Enemy>();
-    //    gameObject.SetActive(true);
-    //    UpdateEnemyData();
-    //}
-    //private void UpdateEnemyData()
-    //{
-    //    imageTower.sprite = currentEnemy.EnemySprtie;
-    //    textDamage.text = "Speed:" + currentEnemy.MoveSpeed;
-    //    textRate.text = "Hp" + currentEnemy.EnemyHp;
-    //    textRange.text = "Gold" + currentEnemy.Gold;
-
-    //}
 }

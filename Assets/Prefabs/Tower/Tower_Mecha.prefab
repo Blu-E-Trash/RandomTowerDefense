@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 8169363098049090027}
   - component: {fileID: 7684383205835394247}
   - component: {fileID: 832942491765116778}
+  - component: {fileID: 352557750956185275}
   m_Layer: 0
   m_Name: Tower_Mecha
   m_TagString: Tower
@@ -133,3 +134,24 @@ MonoBehaviour:
   spawnPoint: {fileID: 1006636362318843436}
   weaponType: 0
   projectilePrefab: {fileID: 5820755337296799149, guid: 593caf64e1a97e247b7f2b0fa2281d9c, type: 3}
+--- !u!65 &352557750956185275
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6453094419102234756}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.88, y: 0.59, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5811317058946132836}
   - component: {fileID: 5794454614566450773}
   - component: {fileID: 8955264041061275395}
-  - component: {fileID: 2021135996809935384}
+  - component: {fileID: 7984491775536124907}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Tower
@@ -133,25 +133,25 @@ MonoBehaviour:
   towerTemplate: {fileID: 11400000, guid: 2f3e1bdcc612c3f48b117316716c6e8f, type: 2}
   spawnPoint: {fileID: 7045813469779626894}
   weaponType: 3
-  projectilePrefab: {fileID: 3780418202305927707, guid: 3c68fe8e0f328f640949f5b6bd91fd26, type: 3}
---- !u!95 &2021135996809935384
-Animator:
-  serializedVersion: 5
+  projectilePrefab: {fileID: 3780418202305927707, guid: 128c84caeddb2d6498453333f7c111cf, type: 3}
+--- !u!65 &7984491775536124907
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4167185272193139921}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4e58d23a856186d459e0fdb527517a67, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0.5, z: 0}

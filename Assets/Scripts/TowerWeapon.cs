@@ -106,6 +106,10 @@ public class TowerWeapon : MonoBehaviour
                 {
                     ChangeState(WeaponState.TryAttackCannon);
                 }
+                else if (weaponType == WeaponType.Sword)
+                {
+                    ChangeState(WeaponState.TryAttackCannon);
+                }
             }
 
             yield return null;
@@ -168,7 +172,9 @@ public class TowerWeapon : MonoBehaviour
        
         //공격력 = 기본 공+업글 추가공
         float damage = towerTemplate.weapon[level].damage + AddedDamage;
+        Debug.Log(towerTemplate.weapon[level].damage+AddedDamage);
         clone.GetComponent<Projectile>().Setup(attackTarget, damage);
+        Debug.Log(clone);
     }
     public bool Upgrade()
     {

@@ -7,8 +7,6 @@ public class objectDetector : MonoBehaviour
     private Tower_Spawner towerSpawner;
     [SerializeField]
     private TowerDataViewer towerDataViewer;
-    [SerializeField]
-    LayerMask mask;
 
     private Camera mainCamera;
     private Ray ray;

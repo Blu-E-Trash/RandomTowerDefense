@@ -10,6 +10,7 @@ public class PlayerAction : MonoBehaviour
     float h;
     float v;
     bool isHorizonMove;
+    bool isADown;
     //현재 바라보고 있는 방향 값을 가진 변수
     Vector2 dirVec;
 
