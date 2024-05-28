@@ -66,7 +66,6 @@ public class objectDetector : MonoBehaviour
                 //타워 패털 비활성화
                 towerDataViewer.OffPanel();
             }
-
             hitTransform = null;
         }
     }

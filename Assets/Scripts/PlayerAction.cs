@@ -14,14 +14,11 @@ public class PlayerAction : MonoBehaviour
     //현재 바라보고 있는 방향 값을 가진 변수
     Vector2 dirVec;
 
-    Animator anim;
     Rigidbody2D rigid;
-
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame 
@@ -43,22 +40,6 @@ public class PlayerAction : MonoBehaviour
         else if (vDown || hUp)
             isHorizonMove = false;
 
-        //애니메이션 잠시 봉인
-        ////Animation
-        //if (anim.GetInteger("hAxisRaw") != h)
-        //{
-        //    anim.SetBool("isChange", true);
-        //    anim.SetInteger("hAxisRaw", (int)h);
-        //}
-        //else if (anim.GetInteger("vAxisRaw") != v)
-        //{
-        //    anim.SetBool("isChange", true);
-        //    anim.SetInteger("vAxisRaw", (int)v);
-        //}
-        //else
-        //    anim.SetBool("isChange", false);
-
-        //Direction
         if (vDown && v == 1)
             dirVec = Vector2.up;
         else if (vDown && v == -1)

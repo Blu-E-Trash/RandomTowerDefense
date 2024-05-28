@@ -18,7 +18,7 @@ public class Tower_Spawner : MonoBehaviour
     public void ReadyToSpawnTower()
     {
         //타워를 랜덤으로 지정
-        towerType = 2;//Random.Range(0,4);
+        towerType = Random.Range(0,4);
         //버튼을 중복해서 누르는 것을 방지
         if(isOnTowerButton == true)
         {

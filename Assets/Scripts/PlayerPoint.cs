@@ -6,7 +6,7 @@ public class PlayerPoint : MonoBehaviour
 {
     [SerializeField]
     private int currentPoint = 0;
-
+    int MaxPoint;
     public int CurrentPoint
     {
         set => currentPoint = Mathf.Max(0, value);

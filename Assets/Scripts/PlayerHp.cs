@@ -10,6 +10,7 @@ public class PlayerHp : MonoBehaviour
     [SerializeField]
     private float maxHP = 20;
     private float currentHp;
+    public GameObject DeadPanel;
     
     
 
@@ -20,6 +21,7 @@ public class PlayerHp : MonoBehaviour
     {
         currentHp = maxHP;
         
+        
     }
 
     public void TakeDamage(float damage)
@@ -29,9 +31,19 @@ public class PlayerHp : MonoBehaviour
 
         StopCoroutine("HitAlphaAnimation");
         StartCoroutine("HitAlphaAnimation");
-
-        if (currentHp <= 0) { 
+    }
+    public void Update()
+    {
+        if (currentHp <= 0) {
+            SetDeadActive();
         }
+    }
+    public void SetDeadActive()
+    {
+        if (DeadPanel.activeSelf)
+            DeadPanel.SetActive(false);
+        else
+            DeadPanel.SetActive(true);
     }
 
     private IEnumerator HitAlphaAnimation()
